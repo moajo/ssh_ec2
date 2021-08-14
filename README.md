@@ -91,3 +91,8 @@ Copy `ssh_ec2` in your $PATH
 git clone https://github.com/moajo/ssh_ec2.git $HOME/ssh_ec2
 ln -s $HOME/ssh_ec2/ssh_ec2 /usr/local/bin/ssh_ec2
 ```
+
+# Related links
+
+- https://qiita.com/sisisin/items/1cb6b79f729f1173eaba
+- https://blog.youyo.io/posts/created-awssh-command-that-can-login-to-ec2-instance-securely/
