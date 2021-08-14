@@ -56,6 +56,33 @@ ssh ec2-user@i-xxxxxxx
 - Permission to run "aws ec2 describe-instances" to determine which AZ the instance is in.
 - Permission to run "aws ec2-instance-connect send-ssh-public-key"
 
+### IAM permission
+
+The minimum permissions are as follows.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["ec2:DescribeInstances"],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["ec2-instance-connect:SendSSHPublicKey"],
+      "Resource": "arn:aws:ec2:us-east-1:0123456789:instance/i-xxxxxxxxxxxxx"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["ssm:StartSession"],
+      "Resource": "i-xxxxxxxxxxxxx"
+    }
+  ]
+}
+```
+
 # Installation
 
 Copy `ssh_ec2` in your $PATH
