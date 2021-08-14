@@ -37,15 +37,15 @@ Options:
 EOF
 }
 
-INSTANCE_ID="$1"
-if [[ -z "${INSTANCE_ID}" ]]; then
-    _usage 1>&2
-    exit 1
-fi
-USER_NAME="$2"
+USER_NAME="$1"
 if [[ -z "${USER_NAME}" ]]; then
     _usage 1>&2
     exit 2
+fi
+INSTANCE_ID="$2"
+if [[ -z "${INSTANCE_ID}" ]]; then
+    _usage 1>&2
+    exit 1
 fi
 KEY_FILE="$3"
 if [[ -z "${KEY_FILE}" ]]; then
