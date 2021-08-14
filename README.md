@@ -8,15 +8,14 @@ Using this command has the following advantages.
 - Access permissions to the instance can be centrally managed by IAM.
 - With the Instance Connect feature, all SSH accesses can be logged by CloudTrail.
 
-# usage
+# Usage
 
-## pattern1: Set up a custom ProxyCommand.(Recommended)
+## Pattern1: Set up a custom ProxyCommand.(Recommended)
 
 Add the following configuration to your `.ssh/config` .
+(see: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html)
 
 ```sshconfig
-(see: https://github.com/moajo/ssh_ec2/blob/master/README.md)
-(see: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html)
 host i-* mi-*
     ProxyCommand sh -c "send_key_ec2 %h %r && aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 ```
@@ -27,14 +26,14 @@ Use the following command to connect to the instance.
 ssh ec2-user@i-xxxxxxx
 ```
 
-## pattern2: use `ssh_ec2` command instead of `ssh` command
+## Pattern2: use `ssh_ec2` command instead of `ssh` command
 
 This pattern can coexist with the normal configuration of ssh via ssm without `send_key_ec2`.
 
 Add the following configuration to your `.ssh/config` .
+(see: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html)
 
 ```sshconfig
-(see: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html)
 host i-* mi-*
     ProxyCommand sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 ```
@@ -46,7 +45,14 @@ Use the following command to connect to the instance.
 ssh_ec2 i-xxxxxxx ec2-user
 ```
 
-# installation
+# Requirements
+
+- AWS CLI is installed.
+- Permission to run "aws ssm start-session".
+- Permission to run "aws ec2 describe-instances" to determine which AZ the instance is in.
+- Permission to run "aws ec2-instance-connect send-ssh-public-key"
+
+# Installation
 
 Copy `send_key_ec2` `ssh_ec2` in your $PATH
 
