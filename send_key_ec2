@@ -55,5 +55,3 @@ AZ=`_get_instance_az "$INSTANCE_ID"`
 
 echo "send $KEY_FILE to $USER_NAME@$INSTANCE_ID($AZ)"
 _send_ssh_public_key_to_instance "$INSTANCE_ID" "$USER_NAME" "$KEY_FILE" "$AZ"
-
-ssh "$USER_NAME@$INSTANCE_ID"
